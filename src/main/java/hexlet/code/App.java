@@ -26,7 +26,7 @@ public class App implements Callable<Integer> {
     private String format = "stylish";
 
     @Override
-    public Integer call() throws Exception {
+    public final Integer call() throws Exception {
         String fileContent1 = Files.readString(Paths.get(filepath1));
         String fileContent2 = Files.readString(Paths.get(filepath2));
         ObjectMapper mapper = new ObjectMapper();
