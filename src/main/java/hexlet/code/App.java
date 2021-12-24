@@ -33,6 +33,7 @@ public class App implements Callable<Integer> {
         Map<String, Object> mapOfFile1 = mapper.readValue(fileContent1, Map.class);
         Map<String, Object> mapOfFile2 = mapper.readValue(fileContent2, Map.class);
         String differ = Differ.generate(mapOfFile1, mapOfFile2);
+        System.out.println(differ);
         return 0;
     }
 
