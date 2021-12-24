@@ -22,8 +22,8 @@ class TestDiffer {
                   "verbose": true,
                   "host": "hexlet.io"
                 }""";
-        String actual = Differ.generate(App.getData(content1), App.getData(content2));
-        String expected = """
+        String actual1 = Differ.generate(App.getData(content1), App.getData(content2));
+        String expected1 = """
                 {
                   - follow: false
                     host: hexlet.io
@@ -32,6 +32,6 @@ class TestDiffer {
                   + timeout: 20
                   + verbose: true
                 }""";
-        assertThat(expected).isEqualTo(actual);
+        assertThat(expected1).isEqualTo(actual1);
     }
 }
