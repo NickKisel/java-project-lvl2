@@ -12,6 +12,9 @@ check-updates:
 lint:
 	./gradlew checkstyleMain checkstyleTest
 
+report:
+	./gradlew jacocoTestReport
+
 build:
 	./gradlew clean build
 
