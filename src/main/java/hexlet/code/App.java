@@ -29,9 +29,8 @@ public class App implements Callable<Integer> {
     public final Integer call() throws Exception {
         String fileContent1 = Files.readString(Paths.get(filepath1));
         String fileContent2 = Files.readString(Paths.get(filepath2));
-        ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> mapOfFile1 = mapper.readValue(fileContent1, Map.class);
-        Map<String, Object> mapOfFile2 = mapper.readValue(fileContent2, Map.class);
+        Map mapOfFile1 = getData(fileContent1);
+        Map mapOfFile2 = getData(fileContent2);
         String differ = Differ.generate(mapOfFile1, mapOfFile2);
         System.out.println(differ);
         return 0;
@@ -40,5 +39,10 @@ public class App implements Callable<Integer> {
     public static void main(String[] args) {
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);
+    }
+
+    public static Map getData(String content) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(content, Map.class);
     }
 }
