@@ -24,16 +24,13 @@ public class Differ {
             if (newData1.containsKey(key) && newData2.containsKey(key)) {
                 if (newData1.get(key).equals(newData2.get(key))) {
                     result.add(neutralSign + key + keyValueDelimiter + newData1.get(key));
-                }
-                if (!newData1.get(key).equals(newData2.get(key))) {
+                } else if (!newData1.get(key).equals(newData2.get(key))) {
                     result.add(negativeSign + key + keyValueDelimiter + newData1.get(key));
                     result.add(positiveSign + key + keyValueDelimiter + newData2.get(key));
                 }
-            }
-            if (!newData2.containsKey(key) && newData1.containsKey(key)) {
+            } else if (!newData2.containsKey(key) && newData1.containsKey(key)) {
                 result.add(negativeSign + key + keyValueDelimiter + newData1.get(key));
-            }
-            if (!newData1.containsKey(key) && newData2.containsKey(key)) {
+            } else if (!newData1.containsKey(key) && newData2.containsKey(key)) {
                 result.add(positiveSign + key + keyValueDelimiter + newData2.get(key));
             }
         }
