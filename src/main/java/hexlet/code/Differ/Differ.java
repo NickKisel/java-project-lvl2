@@ -9,10 +9,8 @@ import java.util.stream.Collectors;
 
 public class Differ {
     public static String generate(Map<String, Object> data1, Map<String, Object> data2) {
-        Map<String, String> newData1 = data1.entrySet().stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> String.valueOf(e.getValue())));
-        Map<String, String> newData2 = data2.entrySet().stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> String.valueOf(e.getValue())));
+        Map<String, String> newData1 = convertData(data1);
+        Map<String, String> newData2 = convertData(data2);
         Set<String> keys = new TreeSet<>(data1.keySet());
         keys.addAll(data2.keySet());
         List<String> result = new ArrayList<>();
@@ -37,5 +35,10 @@ public class Differ {
         result.add(0, "{");
         result.add(result.size(), "}");
         return String.join("\n", result);
+    }
+
+    public static Map<String, String> convertData(Map<String, Object> data) {
+        return data.entrySet().stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, e -> String.valueOf(e.getValue())));
     }
 }
