@@ -7,8 +7,6 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
@@ -27,11 +25,9 @@ public class App implements Callable<Integer> {
 
     @Override
     public final Integer call() throws Exception {
-        String fileContent1 = Files.readString(Paths.get(filepath1));
-        String fileContent2 = Files.readString(Paths.get(filepath2));
         Parser parser = new Parser();
-        Map<String, Object> parseContent1 = parser.getData(fileContent1);
-        Map<String, Object> parseContent2 = parser.getData(fileContent2);
+        Map<String, Object> parseContent1 = parser.getData(filepath1);
+        Map<String, Object> parseContent2 = parser.getData(filepath2);
         String differ = Differ.generate(parseContent1, parseContent2);
         System.out.println(differ);
         return 0;
