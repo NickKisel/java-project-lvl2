@@ -29,7 +29,7 @@ public class Differ {
                     }
                     return null; }, (k1, k2) -> k1, LinkedHashMap::new));
         Formatter formatter = new Formatter();
-        return formatter.choiceFormatter(format, keys, commonData, newData1, newData2);
+        return formatter.choiceFormatter(format, commonData, newData1, newData2);
     }
 
     public static Map<String, String> convertData(Map<String, Object> data) {

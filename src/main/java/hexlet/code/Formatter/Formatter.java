@@ -3,25 +3,24 @@ package hexlet.code.Formatter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public final class Formatter {
     private final List<String> result = new LinkedList<>();
     private String sResult;
 
-    public String choiceFormatter(String format, Set<String> keys, Map<String, String> commonData,
+    public String choiceFormatter(String format, Map<String, String> commonData,
                                   Map<String, String> data1, Map<String, String> data2) {
         if (format.equals("stylish")) {
-            sResult = whitespaceStylish(stylish(keys, commonData, data1, data2));
+            sResult = stylishToString(stylish(commonData, data1, data2));
         }
         return sResult;
     }
 
-    private List<String> stylish(Set<String> keys, Map<String, String> commonData, Map<String, String> data1,
+    private List<String> stylish(Map<String, String> commonData, Map<String, String> data1,
                                  Map<String, String> data2) {
 
-        for (String key : keys) {
+        for (String key : commonData.keySet()) {
             if (commonData.get(key).equals("unchanged")) {
                 result.add(key + ": " + data1.get(key));
             } else if (commonData.get(key).equals("changed")) {
@@ -38,7 +37,7 @@ public final class Formatter {
         return result;
     }
 
-    private String whitespaceStylish(List<String> list) {
+    private String stylishToString(List<String> list) {
         String whitespace = " ";
         final int countWhitespace = 4;
         return list.stream()
