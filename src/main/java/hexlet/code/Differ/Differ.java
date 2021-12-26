@@ -1,40 +1,35 @@
 package hexlet.code.Differ;
 
-import java.util.ArrayList;
-import java.util.List;
+import hexlet.code.Formatter.Formatter;
+
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Differ {
-    public static String generate(Map<String, Object> data1, Map<String, Object> data2) {
+    public static String generate(String format, Map<String, Object> data1, Map<String, Object> data2) {
         Map<String, String> newData1 = convertData(data1);
         Map<String, String> newData2 = convertData(data2);
         Set<String> keys = new TreeSet<>(data1.keySet());
         keys.addAll(data2.keySet());
-        List<String> result = new ArrayList<>();
-        String keyValueDelimiter = ": ";
-        String positiveSign = "  + ";
-        String negativeSign = "  - ";
-        String neutralSign = "    ";
-        for (String key : keys) {
-            if (newData1.containsKey(key) && newData2.containsKey(key)) {
-                if (newData1.get(key).equals(newData2.get(key))) {
-                    result.add(neutralSign + key + keyValueDelimiter + newData1.get(key));
-                } else if (!newData1.get(key).equals(newData2.get(key))) {
-                    result.add(negativeSign + key + keyValueDelimiter + newData1.get(key));
-                    result.add(positiveSign + key + keyValueDelimiter + newData2.get(key));
-                }
-            } else if (!newData2.containsKey(key) && newData1.containsKey(key)) {
-                result.add(negativeSign + key + keyValueDelimiter + newData1.get(key));
-            } else if (!newData1.containsKey(key) && newData2.containsKey(key)) {
-                result.add(positiveSign + key + keyValueDelimiter + newData2.get(key));
-            }
-        }
-        result.add(0, "{");
-        result.add(result.size(), "}");
-        return String.join("\n", result);
+        Map<String, String> commonData = keys.stream()
+                .collect(Collectors.toMap(k -> k, v -> {
+                    if (newData1.containsKey(v) && newData2.containsKey(v)) {
+                        if (newData1.get(v).equals(newData2.get(v))) {
+                            return "unchanged";
+                        } else if (!newData1.get(v).equals(newData2.get(v))) {
+                            return "changed";
+                        }
+                    } else if (!newData2.containsKey(v) && newData1.containsKey(v)) {
+                        return "deleted";
+                    } else if (!newData1.containsKey(v) && newData2.containsKey(v)) {
+                        return "added";
+                    }
+                    return null; }, (k1, k2) -> k1, LinkedHashMap::new));
+        Formatter formatter = new Formatter();
+        return formatter.choiceFormatter(format, keys, commonData, newData1, newData2);
     }
 
     public static Map<String, String> convertData(Map<String, Object> data) {

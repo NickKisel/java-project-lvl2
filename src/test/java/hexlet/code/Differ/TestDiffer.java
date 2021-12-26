@@ -18,7 +18,8 @@ class TestDiffer {
     void testDiffJson() throws Exception {
         String filepath1 = "file1.json";
         String filepath2 = "file2.json";
-        String actual1 = Differ.generate(parser.getData(filepath1), parser.getData(filepath2));
+        String format = "stylish";
+        String actual1 = Differ.generate(format, parser.getData(filepath1), parser.getData(filepath2));
         String expected1 = """
                 {
                     chars1: [a, b, c]
@@ -52,6 +53,7 @@ class TestDiffer {
     void testDiffYaml() throws  Exception {
         String filepath1 = "file1.yml";
         String filepath2 = "file2.yml";
+        String format = "stylish";
         String expected1 = """
                 {
                     chars1: [a, b, c]
@@ -78,7 +80,7 @@ class TestDiffer {
                   - setting3: true
                   + setting3: none
                 }""";
-        String actual1 = Differ.generate(parser.getData(filepath1), parser.getData(filepath2));
+        String actual1 = Differ.generate(format, parser.getData(filepath1), parser.getData(filepath2));
         assertThat(expected1).isEqualTo(actual1);
     }
 }

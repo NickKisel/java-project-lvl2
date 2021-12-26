@@ -20,15 +20,15 @@ public class App implements Callable<Integer> {
     @Parameters(index = "1", description = "path to second file")
     private String filepath2;
 
-    @Option(names = {"-f", "--format"}, description = "output format [default: stylish]")
-    private String format = "stylish";
+    @Option(names = {"-f", "--format"}, description = "output format [default: stylish]", defaultValue = "stylish")
+    private String format;
 
     @Override
     public final Integer call() throws Exception {
         Parser parser = new Parser();
         Map<String, Object> parseContent1 = parser.getData(filepath1);
         Map<String, Object> parseContent2 = parser.getData(filepath2);
-        String differ = Differ.generate(parseContent1, parseContent2);
+        String differ = Differ.generate(format, parseContent1, parseContent2);
         System.out.println(differ);
         return 0;
     }
