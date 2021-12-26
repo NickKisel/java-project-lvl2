@@ -50,7 +50,7 @@ class TestDiffer {
     }
 
     @Test
-    void testDiffYaml() throws  Exception {
+    void testDiffYaml() throws Exception {
         String filepath1 = "file1.yml";
         String filepath2 = "file2.yml";
         String format = "stylish";
@@ -80,6 +80,54 @@ class TestDiffer {
                   - setting3: true
                   + setting3: none
                 }""";
+        String actual1 = Differ.generate(format, parser.getData(filepath1), parser.getData(filepath2));
+        assertThat(expected1).isEqualTo(actual1);
+    }
+
+    @Test
+    void testDiffJsonPlain() throws Exception {
+        String filepath1 = "file1.json";
+        String filepath2 = "file2.json";
+        String format = "plain";
+        String actual1 = Differ.generate(format, parser.getData(filepath1), parser.getData(filepath2));
+        String expected1 = """
+                Property 'chars2' was updated. From [complex value] to false
+                Property 'checked' was updated. From false to true
+                Property 'default' was updated. From null to [complex value]
+                Property 'id' was updated. From 45 to null
+                Property 'key1' was removed
+                Property 'key2' was added with value: 'value2'
+                Property 'numbers2' was updated. From [complex value] to [complex value]
+                Property 'numbers3' was removed
+                Property 'numbers4' was added with value: [complex value]
+                Property 'obj1' was added with value: [complex value]
+                Property 'setting1' was updated. From 'Some value' to 'Another value'
+                Property 'setting2' was updated. From 200 to 300
+                Property 'setting3' was updated. From true to 'none'
+                """;
+        assertThat(actual1).isEqualTo(expected1);
+    }
+
+    @Test
+    void testDiffYamlPlain() throws Exception {
+        String filepath1 = "file1.yml";
+        String filepath2 = "file2.yml";
+        String format = "plain";
+        String expected1 = """
+                Property 'chars2' was updated. From [complex value] to false
+                Property 'checked' was updated. From false to true
+                Property 'default' was updated. From null to [complex value]
+                Property 'id' was updated. From 45 to null
+                Property 'key1' was removed
+                Property 'key2' was added with value: 'value2'
+                Property 'numbers2' was updated. From [complex value] to [complex value]
+                Property 'numbers3' was removed
+                Property 'numbers4' was added with value: [complex value]
+                Property 'obj1' was added with value: [complex value]
+                Property 'setting1' was updated. From 'Some value' to 'Another value'
+                Property 'setting2' was updated. From 200 to 300
+                Property 'setting3' was updated. From true to 'none'
+                """;
         String actual1 = Differ.generate(format, parser.getData(filepath1), parser.getData(filepath2));
         assertThat(expected1).isEqualTo(actual1);
     }
