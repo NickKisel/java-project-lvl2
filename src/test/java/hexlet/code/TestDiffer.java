@@ -18,7 +18,7 @@ class TestDiffer {
         final String filepath1 = "file1.json";
         final String filepath2 = "file2.json";
         final String format = "stylish";
-        final String actual1 = Differ.generate(format, parser.getData(filepath1), parser.getData(filepath2));
+        final String actual1 = Differ.generate(format, filepath1, filepath2);
         String expected1 = """
                 {
                     chars1: [a, b, c]
@@ -50,10 +50,10 @@ class TestDiffer {
 
     @Test
     void testDiffYaml() throws Exception {
-        final String filepath1 = "file1.yml";
-        final String filepath2 = "file2.yml";
-        final String format = "stylish";
-        final String expected1 = """
+        String filepath1 = "file1.yml";
+        String filepath2 = "file2.yml";
+        String format = "stylish";
+        String expected1 = """
                 {
                     chars1: [a, b, c]
                   - chars2: [d, e, f]
@@ -79,16 +79,16 @@ class TestDiffer {
                   - setting3: true
                   + setting3: none
                 }""";
-        String actual1 = Differ.generate(format, parser.getData(filepath1), parser.getData(filepath2));
+        String actual1 = Differ.generate(format, filepath1, filepath2);
         assertThat(expected1).isEqualTo(actual1);
     }
 
     @Test
     void testDiffJsonPlain() throws Exception {
-        final String filepath1 = "file1.json";
-        final String filepath2 = "file2.json";
-        final String format = "plain";
-        final String actual1 = Differ.generate(format, parser.getData(filepath1), parser.getData(filepath2));
+        String filepath1 = "file1.json";
+        String filepath2 = "file2.json";
+        String format = "plain";
+        String actual1 = Differ.generate(format, filepath1, filepath2);
         String expected1 = """
                 Property 'chars2' was updated. From [complex value] to false
                 Property 'checked' was updated. From false to true
@@ -109,9 +109,9 @@ class TestDiffer {
 
     @Test
     void testDiffYamlPlain() throws Exception {
-        final String filepath1 = "file1.yml";
-        final String filepath2 = "file2.yml";
-        final String format = "plain";
+        String filepath1 = "file1.yml";
+        String filepath2 = "file2.yml";
+        String format = "plain";
         String expected1 = """
                 Property 'chars2' was updated. From [complex value] to false
                 Property 'checked' was updated. From false to true
@@ -127,15 +127,15 @@ class TestDiffer {
                 Property 'setting2' was updated. From 200 to 300
                 Property 'setting3' was updated. From true to 'none'
                 """;
-        String actual1 = Differ.generate(format, parser.getData(filepath1), parser.getData(filepath2));
+        String actual1 = Differ.generate(format, filepath1, filepath2);
         assertThat(expected1).isEqualTo(actual1);
     }
 
     @Test
     void testDiffJsonJson() throws Exception {
-        final String filepath1 = "file1.json";
-        final String filepath2 = "file2.json";
-        final String format = "json";
+        String filepath1 = "file1.json";
+        String filepath2 = "file2.json";
+        String format = "json";
         String expected1 = """
                 {
                   "changed" : {
@@ -161,7 +161,7 @@ class TestDiffer {
                     }
                   }
                 }""";
-        String actual1 = Differ.generate(format, parser.getData(filepath1), parser.getData(filepath2));
+        String actual1 = Differ.generate(format, filepath1, filepath2);
         assertThat(expected1).isEqualTo(actual1);
     }
 }

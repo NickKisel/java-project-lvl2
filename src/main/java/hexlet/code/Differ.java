@@ -7,7 +7,10 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Differ {
-    public static String generate(String format, Map<String, Object> data1, Map<String, Object> data2) {
+    public static String generate(String format, String filepath1, String filepath2) throws Exception {
+        Parser parser = new Parser();
+        Map<String, Object> data1 = parser.getData(filepath1);
+        Map<String, Object> data2 = parser.getData(filepath2);
         Set<String> keys = new TreeSet<>(data1.keySet());
         keys.addAll(data2.keySet());
         Map<String, String> commonData = keys.stream()
