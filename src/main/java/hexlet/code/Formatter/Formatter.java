@@ -1,11 +1,16 @@
 package hexlet.code.Formatter;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
 import java.lang.reflect.Array;
-import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.Collection;
 
 public final class Formatter {
     private final List<String> result = new LinkedList<>();
@@ -17,6 +22,8 @@ public final class Formatter {
             sResult = stylishToString(stylish(commonData, data1, data2));
         } else if (format.equals("plain")) {
             sResult = plain(commonData, data1, data2);
+        } else if (format.equals("json")) {
+            sResult = json(commonData, data1, data2);
         }
         return sResult;
     }
@@ -86,5 +93,40 @@ public final class Formatter {
             return "'" + value + "'";
         }
         return String.valueOf(value);
+    }
+
+    private String json(Map<String, String> commonData, Map<String, Object> data1,
+                        Map<String, Object> data2) {
+        Map<String, Object> changed = new LinkedHashMap<>();
+        Map<String, Object> deleted = new LinkedHashMap<>();
+        Map<String, Object> added = new LinkedHashMap<>();
+        Map<String, Map<String, Object>> resultMap = new LinkedHashMap<>();
+        ObjectMapper writer = new ObjectMapper();
+        for (String key : commonData.keySet()) {
+            if (commonData.get(key).equals("changed")) {
+                changed.put(key, data1.get(key));
+                changed.put(key, data2.get(key));
+            } else if (commonData.get(key).equals("deleted")) {
+                deleted.put(key, data1.get(key));
+            } else if (commonData.get(key).equals("added")) {
+                added.put(key, data2.get(key));
+            }
+        }
+        resultMap.put("changed", changed);
+        resultMap.put("deleted", deleted);
+        resultMap.put("added", added);
+        String json = null;
+        try {
+            json = writer.writeValueAsString(resultMap);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String printJson = null;
+        try {
+            printJson = writer.writerWithDefaultPrettyPrinter().writeValueAsString(writer.readTree(json));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return printJson;
     }
 }

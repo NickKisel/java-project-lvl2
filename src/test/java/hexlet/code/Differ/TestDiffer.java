@@ -131,4 +131,38 @@ class TestDiffer {
         String actual1 = Differ.generate(format, parser.getData(filepath1), parser.getData(filepath2));
         assertThat(expected1).isEqualTo(actual1);
     }
+
+    @Test
+    void testDiffJsonJson() throws Exception {
+        String filepath1 = "file1.json";
+        String filepath2 = "file2.json";
+        String format = "json";
+        String expected1 = """
+                {
+                  "changed" : {
+                    "chars2" : false,
+                    "checked" : true,
+                    "default" : [ "value1", "value2" ],
+                    "id" : null,
+                    "numbers2" : [ 22, 33, 44, 55 ],
+                    "setting1" : "Another value",
+                    "setting2" : 300,
+                    "setting3" : "none"
+                  },
+                  "deleted" : {
+                    "key1" : "value1",
+                    "numbers3" : [ 3, 4, 5 ]
+                  },
+                  "added" : {
+                    "key2" : "value2",
+                    "numbers4" : [ 4, 5, 6 ],
+                    "obj1" : {
+                      "nestedKey" : "value",
+                      "isNested" : true
+                    }
+                  }
+                }""";
+        String actual1 = Differ.generate(format, parser.getData(filepath1), parser.getData(filepath2));
+        assertThat(expected1).isEqualTo(actual1);
+    }
 }
