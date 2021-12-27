@@ -1,6 +1,5 @@
-package hexlet.code.Differ;
+package hexlet.code;
 
-import hexlet.code.Parser.Parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
