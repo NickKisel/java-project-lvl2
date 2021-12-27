@@ -15,10 +15,10 @@ class TestDiffer {
 
     @Test
     void testDiffJson() throws Exception {
-        String filepath1 = "file1.json";
-        String filepath2 = "file2.json";
-        String format = "stylish";
-        String actual1 = Differ.generate(format, parser.getData(filepath1), parser.getData(filepath2));
+        final String filepath1 = "file1.json";
+        final String filepath2 = "file2.json";
+        final String format = "stylish";
+        final String actual1 = Differ.generate(format, parser.getData(filepath1), parser.getData(filepath2));
         String expected1 = """
                 {
                     chars1: [a, b, c]
@@ -50,10 +50,10 @@ class TestDiffer {
 
     @Test
     void testDiffYaml() throws Exception {
-        String filepath1 = "file1.yml";
-        String filepath2 = "file2.yml";
-        String format = "stylish";
-        String expected1 = """
+        final String filepath1 = "file1.yml";
+        final String filepath2 = "file2.yml";
+        final String format = "stylish";
+        final String expected1 = """
                 {
                     chars1: [a, b, c]
                   - chars2: [d, e, f]
@@ -85,10 +85,10 @@ class TestDiffer {
 
     @Test
     void testDiffJsonPlain() throws Exception {
-        String filepath1 = "file1.json";
-        String filepath2 = "file2.json";
-        String format = "plain";
-        String actual1 = Differ.generate(format, parser.getData(filepath1), parser.getData(filepath2));
+        final String filepath1 = "file1.json";
+        final String filepath2 = "file2.json";
+        final String format = "plain";
+        final String actual1 = Differ.generate(format, parser.getData(filepath1), parser.getData(filepath2));
         String expected1 = """
                 Property 'chars2' was updated. From [complex value] to false
                 Property 'checked' was updated. From false to true
@@ -109,9 +109,9 @@ class TestDiffer {
 
     @Test
     void testDiffYamlPlain() throws Exception {
-        String filepath1 = "file1.yml";
-        String filepath2 = "file2.yml";
-        String format = "plain";
+        final String filepath1 = "file1.yml";
+        final String filepath2 = "file2.yml";
+        final String format = "plain";
         String expected1 = """
                 Property 'chars2' was updated. From [complex value] to false
                 Property 'checked' was updated. From false to true
@@ -133,9 +133,9 @@ class TestDiffer {
 
     @Test
     void testDiffJsonJson() throws Exception {
-        String filepath1 = "file1.json";
-        String filepath2 = "file2.json";
-        String format = "json";
+        final String filepath1 = "file1.json";
+        final String filepath2 = "file2.json";
+        final String format = "json";
         String expected1 = """
                 {
                   "changed" : {
