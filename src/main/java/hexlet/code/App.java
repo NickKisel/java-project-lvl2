@@ -18,7 +18,7 @@ public class App implements Callable<Integer> {
     private String filepath2;
 
     @Option(names = {"-f", "--format"}, description = "output format [default: stylish]", defaultValue = "stylish")
-    private String formatName;
+    private String formatName = "stylish";
 
     @Override
     public final Integer call() throws Exception {
