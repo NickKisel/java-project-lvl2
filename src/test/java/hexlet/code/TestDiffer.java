@@ -18,7 +18,7 @@ class TestDiffer {
         final String filepath1 = "file1.json";
         final String filepath2 = "file2.json";
         final String format = "stylish";
-        final String actual1 = Differ.generate(format, filepath1, filepath2);
+        final String actual1 = Differ.generate(filepath1, filepath2, format);
         String expected1 = """
                 {
                     chars1: [a, b, c]
@@ -79,7 +79,7 @@ class TestDiffer {
                   - setting3: true
                   + setting3: none
                 }""";
-        String actual1 = Differ.generate(format, filepath1, filepath2);
+        String actual1 = Differ.generate(filepath1, filepath2, format);
         assertThat(expected1).isEqualTo(actual1);
     }
 
@@ -88,7 +88,7 @@ class TestDiffer {
         String filepath1 = "file1.json";
         String filepath2 = "file2.json";
         String format = "plain";
-        String actual1 = Differ.generate(format, filepath1, filepath2);
+        String actual1 = Differ.generate(filepath1, filepath2, format);
         String expected1 = """
                 Property 'chars2' was updated. From [complex value] to false
                 Property 'checked' was updated. From false to true
@@ -127,7 +127,7 @@ class TestDiffer {
                 Property 'setting2' was updated. From 200 to 300
                 Property 'setting3' was updated. From true to 'none'
                 """;
-        String actual1 = Differ.generate(format, filepath1, filepath2);
+        String actual1 = Differ.generate(filepath1, filepath2, format);
         assertThat(expected1).isEqualTo(actual1);
     }
 
@@ -161,7 +161,7 @@ class TestDiffer {
                     }
                   }
                 }""";
-        String actual1 = Differ.generate(format, filepath1, filepath2);
+        String actual1 = Differ.generate(filepath1, filepath2, format);
         assertThat(expected1).isEqualTo(actual1);
     }
 }
