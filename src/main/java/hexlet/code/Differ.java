@@ -7,7 +7,7 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Differ {
-    public static String generate(String filepath1, String filepath2, String format) throws Exception {
+    public static String generate(String filepath1, String filepath2, String formatName) throws Exception {
         Parser parser = new Parser();
         Map<String, Object> data1 = parser.getData(filepath1);
         Map<String, Object> data2 = parser.getData(filepath2);
@@ -29,6 +29,6 @@ public class Differ {
                     return null;
                 }, (k1, k2) -> k1, LinkedHashMap::new));
         Formatter formatter = new Formatter();
-        return formatter.choiceFormatter(format, commonData, data1, data2);
+        return formatter.choiceFormatter(formatName, commonData, data1, data2);
     }
 }

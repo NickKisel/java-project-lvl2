@@ -16,13 +16,13 @@ public final class Formatter {
     private final List<String> result = new LinkedList<>();
     private String sResult;
 
-    public String choiceFormatter(String format, Map<String, String> commonData,
+    public String choiceFormatter(String formatName, Map<String, String> commonData,
                                   Map<String, Object> data1, Map<String, Object> data2) {
-        if (format.equals("stylish")) {
+        if (formatName.equals("stylish")) {
             sResult = stylishToString(stylish(commonData, data1, data2));
-        } else if (format.equals("plain")) {
+        } else if (formatName.equals("plain")) {
             sResult = plain(commonData, data1, data2);
-        } else if (format.equals("json")) {
+        } else if (formatName.equals("json")) {
             sResult = json(commonData, data1, data2);
         }
         return sResult;
