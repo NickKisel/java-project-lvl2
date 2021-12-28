@@ -10,7 +10,6 @@ class TestDiffer {
     void testDiffJson() throws Exception {
         String filepath1 = "file1.json";
         String filepath2 = "file2.json";
-        String formatName = "stylish";
         String expected1 = """
                 {
                     chars1: [a, b, c]
@@ -37,7 +36,7 @@ class TestDiffer {
                   - setting3: true
                   + setting3: none
                 }""";
-        assertThat(Differ.generate(filepath1, filepath2, formatName)).isEqualTo(expected1);
+        assertThat(Differ.generate(filepath1, filepath2)).isEqualTo(expected1);
     }
 
     @Test

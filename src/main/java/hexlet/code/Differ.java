@@ -31,4 +31,8 @@ public class Differ {
         Formatter formatter = new Formatter();
         return formatter.choiceFormatter(formatName, commonData, data1, data2);
     }
+
+    public static String generate(String filepath1, String filepath2) throws Exception {
+        return generate(filepath1, filepath2, "stylish");
+    }
 }

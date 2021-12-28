@@ -9,7 +9,6 @@ import java.util.concurrent.Callable;
 
 @Command(name = "gendiff", mixinStandardHelpOptions = true, version = "gendiff 1.0",
         description = "Compares two configuration files and shows a difference.")
-
 public class App implements Callable<Integer> {
     @Parameters(index = "0", description = "path to first file")
     private String filepath1;
@@ -18,12 +17,12 @@ public class App implements Callable<Integer> {
     private String filepath2;
 
     @Option(names = {"-f", "--format"}, description = "output format [default: stylish]", defaultValue = "stylish")
-    private String formatName = "stylish";
+    private String formatName;
 
     @Override
     public final Integer call() throws Exception {
-        Differ differ = new Differ();
-        String outDiffer = differ.generate(filepath1, filepath2, formatName);
+        String outDiffer;
+        outDiffer = Differ.generate(filepath1, filepath2, formatName);
         System.out.println(outDiffer);
         return 0;
     }
