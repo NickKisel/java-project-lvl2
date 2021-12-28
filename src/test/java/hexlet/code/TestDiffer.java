@@ -8,10 +8,9 @@ class TestDiffer {
 
     @Test
     void testDiffJson() throws Exception {
-        final String filepath1 = "file1.json";
-        final String filepath2 = "file2.json";
-        final String format = "stylish";
-        final String actual1 = Differ.generate(filepath1, filepath2, format);
+        String filepath1 = "file1.json";
+        String filepath2 = "file2.json";
+        String format = "stylish";
         String expected1 = """
                 {
                     chars1: [a, b, c]
@@ -38,7 +37,7 @@ class TestDiffer {
                   - setting3: true
                   + setting3: none
                 }""";
-        assertThat(actual1).isEqualTo(expected1);
+        assertThat(Differ.generate(filepath1, filepath2, format)).isEqualTo(expected1);
     }
 
     @Test
@@ -72,8 +71,7 @@ class TestDiffer {
                   - setting3: true
                   + setting3: none
                 }""";
-        String actual1 = Differ.generate(filepath1, filepath2, format);
-        assertThat(expected1).isEqualTo(actual1);
+        assertThat(Differ.generate(filepath1, filepath2, format)).isEqualTo(expected1);
     }
 
     @Test
@@ -81,7 +79,6 @@ class TestDiffer {
         String filepath1 = "file1.json";
         String filepath2 = "file2.json";
         String format = "plain";
-        String actual1 = Differ.generate(filepath1, filepath2, format);
         String expected1 = """
                 Property 'chars2' was updated. From [complex value] to false
                 Property 'checked' was updated. From false to true
@@ -97,7 +94,7 @@ class TestDiffer {
                 Property 'setting2' was updated. From 200 to 300
                 Property 'setting3' was updated. From true to 'none'
                 """;
-        assertThat(actual1).isEqualTo(expected1);
+        assertThat(Differ.generate(filepath1, filepath2, format)).isEqualTo(expected1);
     }
 
     @Test
@@ -120,8 +117,7 @@ class TestDiffer {
                 Property 'setting2' was updated. From 200 to 300
                 Property 'setting3' was updated. From true to 'none'
                 """;
-        String actual1 = Differ.generate(filepath1, filepath2, format);
-        assertThat(expected1).isEqualTo(actual1);
+        assertThat(Differ.generate(filepath1, filepath2, format)).isEqualTo(expected1);
     }
 
     @Test
@@ -154,7 +150,7 @@ class TestDiffer {
                     }
                   }
                 }""";
-        String actual1 = Differ.generate(filepath1, filepath2, format);
-        assertThat(expected1).isEqualTo(actual1);
+
+        assertThat(Differ.generate(filepath1, filepath2, format)).isEqualTo(expected1);
     }
 }
