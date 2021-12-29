@@ -77,7 +77,7 @@ public final class Formatter {
         }
         return result.stream()
                 .map(x -> {
-                    if (result.indexOf(x) == result.size()) {
+                    if (result.indexOf(x) == result.size() - 1) {
                         return x;
                     } else {
                         return x + "\n";
