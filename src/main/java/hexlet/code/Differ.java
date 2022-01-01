@@ -16,9 +16,11 @@ public class Differ {
         Map<String, String> commonData = keys.stream()
                 .collect(Collectors.toMap(k -> k, v -> {
                     if (data1.containsKey(v) && data2.containsKey(v)) {
-                        if (String.valueOf(data1.get(v)).equals(String.valueOf(data2.get(v)))) {
+                        if (data1.get(v) != null && data2.get(v) != null && data1.get(v).equals(data2.get(v))
+                                || data1.get(v) == data2.get(v)) {
                             return "unchanged";
-                        } else if (!String.valueOf(data1.get(v)).equals(String.valueOf(data2.get(v)))) {
+                        } else if (data1.get(v) != null && data2.get(v) != null && !data1.get(v).equals(data2.get(v))
+                                || data1.get(v) != data2.get(v)) {
                             return "changed";
                         }
                     } else if (!data2.containsKey(v) && data1.containsKey(v)) {
