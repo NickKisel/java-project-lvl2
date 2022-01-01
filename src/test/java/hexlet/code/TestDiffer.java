@@ -5,11 +5,12 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class TestDiffer {
+    private final String filepath0 = "build/resources/test/fixtures/";
 
     @Test
     void testDiffJson() throws Exception {
-        String filepath1 = "file1.json";
-        String filepath2 = "file2.json";
+        String filepath1 = filepath0 + "file1.json";
+        String filepath2 = filepath0 + "file2.json";
         String expected1 = """
                 {
                     chars1: [a, b, c]
@@ -41,8 +42,8 @@ class TestDiffer {
 
     @Test
     void testDiffYaml() throws Exception {
-        String filepath1 = "file1.yml";
-        String filepath2 = "file2.yml";
+        String filepath1 = filepath0 + "file1.yml";
+        String filepath2 = filepath0 + "file2.yml";
         String formatName = "stylish";
         String expected1 = """
                 {
@@ -75,8 +76,8 @@ class TestDiffer {
 
     @Test
     void testDiffJsonPlain() throws Exception {
-        String filepath1 = "file1.json";
-        String filepath2 = "file2.json";
+        String filepath1 = filepath0 + "file1.json";
+        String filepath2 = filepath0 + "file2.json";
         String formatName = "plain";
         String expected1 = """
                 Property 'chars2' was updated. From [complex value] to false
@@ -97,8 +98,8 @@ class TestDiffer {
 
     @Test
     void testDiffYamlPlain() throws Exception {
-        String filepath1 = "file1.yml";
-        String filepath2 = "file2.yml";
+        String filepath1 = filepath0 + "file1.yml";
+        String filepath2 = filepath0 + "file2.yml";
         String formatName = "plain";
         String expected1 = """
                 Property 'chars2' was updated. From [complex value] to false
@@ -119,8 +120,8 @@ class TestDiffer {
 
     @Test
     void testDiffJsonJson() throws Exception {
-        String filepath1 = "file1.json";
-        String filepath2 = "file2.json";
+        String filepath1 = filepath0 + "file1.json";
+        String filepath2 = filepath0 + "file2.json";
         String formatName = "json";
         String expected1 = """
                 {
