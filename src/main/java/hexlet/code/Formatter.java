@@ -19,7 +19,7 @@ public final class Formatter {
     public String choiceFormatter(String formatName, Map<String, String> commonData,
                                   Map<String, Object> data1, Map<String, Object> data2) {
         if (formatName.equals("stylish")) {
-            sResult = stylishToString(stylish(commonData, data1, data2));
+            sResult = stylish(commonData, data1, data2);
         } else if (formatName.equals("plain")) {
             sResult = plain(commonData, data1, data2);
         } else if (formatName.equals("json")) {
@@ -28,8 +28,8 @@ public final class Formatter {
         return sResult;
     }
 
-    private List<String> stylish(Map<String, String> commonData, Map<String, Object> data1,
-                                 Map<String, Object> data2) {
+    private String stylish(Map<String, String> commonData, Map<String, Object> data1,
+                           Map<String, Object> data2) {
         for (String key : commonData.keySet()) {
             if (commonData.get(key).equals("unchanged")) {
                 result.add(key + ": " + data1.get(key));
@@ -44,7 +44,7 @@ public final class Formatter {
         }
         result.add(0, "{");
         result.add(result.size(), "}");
-        return result;
+        return stylishToString(result);
     }
 
     private String stylishToString(List<String> list) {
