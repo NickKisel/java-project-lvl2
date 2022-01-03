@@ -86,13 +86,13 @@ public final class Formatter {
                 .collect(Collectors.joining());
     }
 
-    private String getStringValuePlain(Object value) {
+    private Object getStringValuePlain(Object value) {
         if (value instanceof Collection || value instanceof Map || value instanceof Array) {
             return "[complex value]";
         } else if (value instanceof String) {
             return "'" + value + "'";
         }
-        return String.valueOf(value);
+        return value;
     }
 
     private String json(Map<String, String> commonData, Map<String, Object> data1,
