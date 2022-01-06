@@ -6,9 +6,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class TestDiffer {
     private final String filepath0 = "build/resources/test/fixtures/";
+//    private String getFileContent(String filepath) throws IOException {
+//        return Files.readString(Paths.get(filepath0 + filepath));
+//    }
 
     @Test
-    void testDiffJson() throws Exception {
+    void testDiffJsonDefault() throws Exception {
         String filepath1 = filepath0 + "file1.json";
         String filepath2 = filepath0 + "file2.json";
         String expected1 = """
@@ -41,7 +44,75 @@ class TestDiffer {
     }
 
     @Test
-    void testDiffYaml() throws Exception {
+    void testDiffYamlDefault() throws Exception {
+        String filepath1 = filepath0 + "file1.yml";
+        String filepath2 = filepath0 + "file2.yml";
+        String formatName = "stylish";
+        String expected1 = """
+                {
+                    chars1: [a, b, c]
+                  - chars2: [d, e, f]
+                  + chars2: false
+                  - checked: false
+                  + checked: true
+                  - default: null
+                  + default: [value1, value2]
+                  - id: 45
+                  + id: null
+                  - key1: value1
+                  + key2: value2
+                    numbers1: [1, 2, 3, 4]
+                  - numbers2: [2, 3, 4, 5]
+                  + numbers2: [22, 33, 44, 55]
+                  - numbers3: [3, 4, 5]
+                  + numbers4: [4, 5, 6]
+                  + obj1: {nestedKey=value, isNested=true}
+                  - setting1: Some value
+                  + setting1: Another value
+                  - setting2: 200
+                  + setting2: 300
+                  - setting3: true
+                  + setting3: none
+                }""";
+        assertThat(Differ.generate(filepath1, filepath2, formatName)).isEqualTo(expected1);
+    }
+
+    @Test
+    void testDiffJsonStylish() throws Exception {
+        String filepath1 = filepath0 + "file1.json";
+        String filepath2 = filepath0 + "file2.json";
+        String formatName = "stylish";
+        String expected1 = """
+                {
+                    chars1: [a, b, c]
+                  - chars2: [d, e, f]
+                  + chars2: false
+                  - checked: false
+                  + checked: true
+                  - default: null
+                  + default: [value1, value2]
+                  - id: 45
+                  + id: null
+                  - key1: value1
+                  + key2: value2
+                    numbers1: [1, 2, 3, 4]
+                  - numbers2: [2, 3, 4, 5]
+                  + numbers2: [22, 33, 44, 55]
+                  - numbers3: [3, 4, 5]
+                  + numbers4: [4, 5, 6]
+                  + obj1: {nestedKey=value, isNested=true}
+                  - setting1: Some value
+                  + setting1: Another value
+                  - setting2: 200
+                  + setting2: 300
+                  - setting3: true
+                  + setting3: none
+                }""";
+        assertThat(Differ.generate(filepath1, filepath2, formatName)).isEqualTo(expected1);
+    }
+
+    @Test
+    void testDiffYamlStylish() throws Exception {
         String filepath1 = filepath0 + "file1.yml";
         String filepath2 = filepath0 + "file2.yml";
         String formatName = "stylish";
@@ -122,6 +193,40 @@ class TestDiffer {
     void testDiffJsonJson() throws Exception {
         String filepath1 = filepath0 + "file1.json";
         String filepath2 = filepath0 + "file2.json";
+        String formatName = "json";
+        String expected1 = """
+                {
+                  "changed" : {
+                    "chars2" : false,
+                    "checked" : true,
+                    "default" : [ "value1", "value2" ],
+                    "id" : null,
+                    "numbers2" : [ 22, 33, 44, 55 ],
+                    "setting1" : "Another value",
+                    "setting2" : 300,
+                    "setting3" : "none"
+                  },
+                  "deleted" : {
+                    "key1" : "value1",
+                    "numbers3" : [ 3, 4, 5 ]
+                  },
+                  "added" : {
+                    "key2" : "value2",
+                    "numbers4" : [ 4, 5, 6 ],
+                    "obj1" : {
+                      "nestedKey" : "value",
+                      "isNested" : true
+                    }
+                  }
+                }""";
+
+        assertThat(Differ.generate(filepath1, filepath2, formatName)).isEqualTo(expected1);
+    }
+
+    @Test
+    void testDiffYamlJson() throws Exception {
+        String filepath1 = filepath0 + "file1.yml";
+        String filepath2 = filepath0 + "file2.yml";
         String formatName = "json";
         String expected1 = """
                 {
