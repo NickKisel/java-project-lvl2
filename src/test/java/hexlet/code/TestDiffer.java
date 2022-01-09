@@ -6,9 +6,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class TestDiffer {
     private final String filepath0 = "build/resources/test/fixtures/";
-//    private String getFileContent(String filepath) throws IOException {
-//        return Files.readString(Paths.get(filepath0 + filepath));
-//    }
 
     @Test
     void testDiffJsonDefault() throws Exception {
@@ -47,7 +44,6 @@ class TestDiffer {
     void testDiffYamlDefault() throws Exception {
         String filepath1 = filepath0 + "file1.yml";
         String filepath2 = filepath0 + "file2.yml";
-        String formatName = "stylish";
         String expected1 = """
                 {
                     chars1: [a, b, c]
@@ -74,7 +70,7 @@ class TestDiffer {
                   - setting3: true
                   + setting3: none
                 }""";
-        assertThat(Differ.generate(filepath1, filepath2, formatName)).isEqualTo(expected1);
+        assertThat(Differ.generate(filepath1, filepath2)).isEqualTo(expected1);
     }
 
     @Test
@@ -197,14 +193,14 @@ class TestDiffer {
         String expected1 = """
                 {
                   "changed" : {
-                    "chars2" : false,
-                    "checked" : true,
-                    "default" : [ "value1", "value2" ],
-                    "id" : null,
-                    "numbers2" : [ 22, 33, 44, 55 ],
-                    "setting1" : "Another value",
-                    "setting2" : 300,
-                    "setting3" : "none"
+                    "chars2" : [ [ "d", "e", "f" ], false ],
+                    "checked" : [ false, true ],
+                    "default" : [ null, [ "value1", "value2" ] ],
+                    "id" : [ 45, null ],
+                    "numbers2" : [ [ 2, 3, 4, 5 ], [ 22, 33, 44, 55 ] ],
+                    "setting1" : [ "Some value", "Another value" ],
+                    "setting2" : [ 200, 300 ],
+                    "setting3" : [ true, "none" ]
                   },
                   "deleted" : {
                     "key1" : "value1",
@@ -231,14 +227,14 @@ class TestDiffer {
         String expected1 = """
                 {
                   "changed" : {
-                    "chars2" : false,
-                    "checked" : true,
-                    "default" : [ "value1", "value2" ],
-                    "id" : null,
-                    "numbers2" : [ 22, 33, 44, 55 ],
-                    "setting1" : "Another value",
-                    "setting2" : 300,
-                    "setting3" : "none"
+                    "chars2" : [ [ "d", "e", "f" ], false ],
+                    "checked" : [ false, true ],
+                    "default" : [ null, [ "value1", "value2" ] ],
+                    "id" : [ 45, null ],
+                    "numbers2" : [ [ 2, 3, 4, 5 ], [ 22, 33, 44, 55 ] ],
+                    "setting1" : [ "Some value", "Another value" ],
+                    "setting2" : [ 200, 300 ],
+                    "setting3" : [ true, "none" ]
                   },
                   "deleted" : {
                     "key1" : "value1",

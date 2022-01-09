@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import hexlet.code.Node;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,8 +19,7 @@ public final class Json {
         ObjectMapper writer = new ObjectMapper();
         for (Node node : commonData) {
             if (node.getOperation().equals("changed")) {
-                changed.put(node.getKey(), node.getValue());
-                changed.put(node.getKey(), node.getValue2());
+                changed.put(node.getKey(), Arrays.asList(node.getValue(), node.getValue2()));
             } else if (node.getOperation().equals("deleted")) {
                 deleted.put(node.getKey(), node.getValue());
             } else if (node.getOperation().equals("added")) {
