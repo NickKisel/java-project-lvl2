@@ -1,38 +1,34 @@
 package hexlet.code;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public final class Node {
     private final String key;
-    private final String operation;
-    private final Object value;
-    private final Object value2;
+    private final Map<String, Object> description;
 
     public String getKey() {
-        return this.key;
+        return key;
     }
 
-    public String getOperation() {
-        return this.operation;
-    }
-
-    public Object getValue() {
-        return this.value;
-    }
-
-    public Object getValue2() {
-        return this.value2;
+    public Map<String, Object> getDescription() {
+        return description;
     }
 
     public Node(String setKey, String setOperation, Object setValue) {
         this.key = setKey;
-        this.operation = setOperation;
-        this.value = setValue;
-        value2 = null;
+        Map<String, Object> map = new LinkedHashMap<>();
+        map.put("operation", setOperation);
+        map.put("value", setValue);
+        this.description = map;
     }
 
     public Node(String setKey, String setOperation, Object setValue, Object setValue2) {
         this.key = setKey;
-        this.operation = setOperation;
-        this.value = setValue;
-        this.value2 = setValue2;
+        Map<String, Object> map = new LinkedHashMap<>();
+        map.put("operation", setOperation);
+        map.put("value", setValue);
+        map.put("newValue", setValue2);
+        this.description = map;
     }
 }

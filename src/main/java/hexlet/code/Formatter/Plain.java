@@ -14,14 +14,15 @@ public final class Plain {
     public String getPlainFormat(List<Node> commonData) {
         List<String> result = new LinkedList<>();
         for (Node node : commonData) {
-            if (node.getOperation().equals("changed")) {
-                result.add("Property '" + node.getKey() + "' was updated. From " + getStringValuePlain(node.getValue())
-                        + " to " + getStringValuePlain(node.getValue2()));
-            } else if (node.getOperation().equals("deleted")) {
+            if (node.getDescription().get("operation").equals("changed")) {
+                result.add("Property '" + node.getKey() + "' was updated. From "
+                        + getStringValuePlain(node.getDescription().get("value")) + " to "
+                        + getStringValuePlain(node.getDescription().get("newValue")));
+            } else if (node.getDescription().get("operation").equals("deleted")) {
                 result.add("Property '" + node.getKey() + "' was removed");
-            } else if (node.getOperation().equals("added")) {
+            } else if (node.getDescription().get("operation").equals("added")) {
                 result.add("Property '" + node.getKey() + "' was added with value: "
-                        + getStringValuePlain(node.getValue()));
+                        + getStringValuePlain(node.getDescription().get("value")));
             }
         }
         return result.stream()

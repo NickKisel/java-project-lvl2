@@ -191,31 +191,108 @@ class TestDiffer {
         String filepath2 = filepath0 + "file2.json";
         String formatName = "json";
         String expected1 = """
-                {
-                  "changed" : {
-                    "chars2" : [ [ "d", "e", "f" ], false ],
-                    "checked" : [ false, true ],
-                    "default" : [ null, [ "value1", "value2" ] ],
-                    "id" : [ 45, null ],
-                    "numbers2" : [ [ 2, 3, 4, 5 ], [ 22, 33, 44, 55 ] ],
-                    "setting1" : [ "Some value", "Another value" ],
-                    "setting2" : [ 200, 300 ],
-                    "setting3" : [ true, "none" ]
-                  },
-                  "deleted" : {
-                    "key1" : "value1",
-                    "numbers3" : [ 3, 4, 5 ]
-                  },
-                  "added" : {
-                    "key2" : "value2",
-                    "numbers4" : [ 4, 5, 6 ],
-                    "obj1" : {
+                [ {
+                  "key" : "chars1",
+                  "description" : {
+                    "operation" : "unchanged",
+                    "value" : [ "a", "b", "c" ]
+                  }
+                }, {
+                  "key" : "chars2",
+                  "description" : {
+                    "operation" : "changed",
+                    "value" : [ "d", "e", "f" ],
+                    "newValue" : false
+                  }
+                }, {
+                  "key" : "checked",
+                  "description" : {
+                    "operation" : "changed",
+                    "value" : false,
+                    "newValue" : true
+                  }
+                }, {
+                  "key" : "default",
+                  "description" : {
+                    "operation" : "changed",
+                    "value" : null,
+                    "newValue" : [ "value1", "value2" ]
+                  }
+                }, {
+                  "key" : "id",
+                  "description" : {
+                    "operation" : "changed",
+                    "value" : 45,
+                    "newValue" : null
+                  }
+                }, {
+                  "key" : "key1",
+                  "description" : {
+                    "operation" : "deleted",
+                    "value" : "value1"
+                  }
+                }, {
+                  "key" : "key2",
+                  "description" : {
+                    "operation" : "added",
+                    "value" : "value2"
+                  }
+                }, {
+                  "key" : "numbers1",
+                  "description" : {
+                    "operation" : "unchanged",
+                    "value" : [ 1, 2, 3, 4 ]
+                  }
+                }, {
+                  "key" : "numbers2",
+                  "description" : {
+                    "operation" : "changed",
+                    "value" : [ 2, 3, 4, 5 ],
+                    "newValue" : [ 22, 33, 44, 55 ]
+                  }
+                }, {
+                  "key" : "numbers3",
+                  "description" : {
+                    "operation" : "deleted",
+                    "value" : [ 3, 4, 5 ]
+                  }
+                }, {
+                  "key" : "numbers4",
+                  "description" : {
+                    "operation" : "added",
+                    "value" : [ 4, 5, 6 ]
+                  }
+                }, {
+                  "key" : "obj1",
+                  "description" : {
+                    "operation" : "added",
+                    "value" : {
                       "nestedKey" : "value",
                       "isNested" : true
                     }
                   }
-                }""";
-
+                }, {
+                  "key" : "setting1",
+                  "description" : {
+                    "operation" : "changed",
+                    "value" : "Some value",
+                    "newValue" : "Another value"
+                  }
+                }, {
+                  "key" : "setting2",
+                  "description" : {
+                    "operation" : "changed",
+                    "value" : 200,
+                    "newValue" : 300
+                  }
+                }, {
+                  "key" : "setting3",
+                  "description" : {
+                    "operation" : "changed",
+                    "value" : true,
+                    "newValue" : "none"
+                  }
+                } ]""";
         assertThat(Differ.generate(filepath1, filepath2, formatName)).isEqualTo(expected1);
     }
 
@@ -225,31 +302,108 @@ class TestDiffer {
         String filepath2 = filepath0 + "file2.yml";
         String formatName = "json";
         String expected1 = """
-                {
-                  "changed" : {
-                    "chars2" : [ [ "d", "e", "f" ], false ],
-                    "checked" : [ false, true ],
-                    "default" : [ null, [ "value1", "value2" ] ],
-                    "id" : [ 45, null ],
-                    "numbers2" : [ [ 2, 3, 4, 5 ], [ 22, 33, 44, 55 ] ],
-                    "setting1" : [ "Some value", "Another value" ],
-                    "setting2" : [ 200, 300 ],
-                    "setting3" : [ true, "none" ]
-                  },
-                  "deleted" : {
-                    "key1" : "value1",
-                    "numbers3" : [ 3, 4, 5 ]
-                  },
-                  "added" : {
-                    "key2" : "value2",
-                    "numbers4" : [ 4, 5, 6 ],
-                    "obj1" : {
+                [ {
+                  "key" : "chars1",
+                  "description" : {
+                    "operation" : "unchanged",
+                    "value" : [ "a", "b", "c" ]
+                  }
+                }, {
+                  "key" : "chars2",
+                  "description" : {
+                    "operation" : "changed",
+                    "value" : [ "d", "e", "f" ],
+                    "newValue" : false
+                  }
+                }, {
+                  "key" : "checked",
+                  "description" : {
+                    "operation" : "changed",
+                    "value" : false,
+                    "newValue" : true
+                  }
+                }, {
+                  "key" : "default",
+                  "description" : {
+                    "operation" : "changed",
+                    "value" : null,
+                    "newValue" : [ "value1", "value2" ]
+                  }
+                }, {
+                  "key" : "id",
+                  "description" : {
+                    "operation" : "changed",
+                    "value" : 45,
+                    "newValue" : null
+                  }
+                }, {
+                  "key" : "key1",
+                  "description" : {
+                    "operation" : "deleted",
+                    "value" : "value1"
+                  }
+                }, {
+                  "key" : "key2",
+                  "description" : {
+                    "operation" : "added",
+                    "value" : "value2"
+                  }
+                }, {
+                  "key" : "numbers1",
+                  "description" : {
+                    "operation" : "unchanged",
+                    "value" : [ 1, 2, 3, 4 ]
+                  }
+                }, {
+                  "key" : "numbers2",
+                  "description" : {
+                    "operation" : "changed",
+                    "value" : [ 2, 3, 4, 5 ],
+                    "newValue" : [ 22, 33, 44, 55 ]
+                  }
+                }, {
+                  "key" : "numbers3",
+                  "description" : {
+                    "operation" : "deleted",
+                    "value" : [ 3, 4, 5 ]
+                  }
+                }, {
+                  "key" : "numbers4",
+                  "description" : {
+                    "operation" : "added",
+                    "value" : [ 4, 5, 6 ]
+                  }
+                }, {
+                  "key" : "obj1",
+                  "description" : {
+                    "operation" : "added",
+                    "value" : {
                       "nestedKey" : "value",
                       "isNested" : true
                     }
                   }
-                }""";
-
+                }, {
+                  "key" : "setting1",
+                  "description" : {
+                    "operation" : "changed",
+                    "value" : "Some value",
+                    "newValue" : "Another value"
+                  }
+                }, {
+                  "key" : "setting2",
+                  "description" : {
+                    "operation" : "changed",
+                    "value" : 200,
+                    "newValue" : 300
+                  }
+                }, {
+                  "key" : "setting3",
+                  "description" : {
+                    "operation" : "changed",
+                    "value" : true,
+                    "newValue" : "none"
+                  }
+                } ]""";
         assertThat(Differ.generate(filepath1, filepath2, formatName)).isEqualTo(expected1);
     }
 }

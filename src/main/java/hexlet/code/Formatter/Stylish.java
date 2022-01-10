@@ -11,15 +11,15 @@ public final class Stylish {
     public String getStylishFormat(List<Node> commonData) {
         List<String> result = new LinkedList<>();
         for (Node node : commonData) {
-            if (node.getOperation().equals("unchanged")) {
-                result.add(node.getKey() + ": " + node.getValue());
-            } else if (node.getOperation().equals("changed")) {
-                result.add("- " + node.getKey() + ": " + node.getValue());
-                result.add("+ " + node.getKey() + ": " + node.getValue2());
-            } else if (node.getOperation().equals("deleted")) {
-                result.add("- " + node.getKey() + ": " + node.getValue());
-            } else if (node.getOperation().equals("added")) {
-                result.add("+ " + node.getKey() + ": " + node.getValue());
+            if (node.getDescription().get("operation").equals("unchanged")) {
+                result.add(node.getKey() + ": " + node.getDescription().get("value"));
+            } else if (node.getDescription().get("operation").equals("changed")) {
+                result.add("- " + node.getKey() + ": " + node.getDescription().get("value"));
+                result.add("+ " + node.getKey() + ": " + node.getDescription().get("newValue"));
+            } else if (node.getDescription().get("operation").equals("deleted")) {
+                result.add("- " + node.getKey() + ": " + node.getDescription().get("value"));
+            } else if (node.getDescription().get("operation").equals("added")) {
+                result.add("+ " + node.getKey() + ": " + node.getDescription().get("value"));
             }
         }
         result.add(0, "{");
