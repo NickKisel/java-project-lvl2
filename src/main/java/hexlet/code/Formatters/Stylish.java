@@ -1,4 +1,4 @@
-package hexlet.code.Formatter;
+package hexlet.code.Formatters;
 
 import hexlet.code.Node;
 

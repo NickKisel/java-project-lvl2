@@ -1,7 +1,8 @@
-package hexlet.code.Formatter;
+package hexlet.code;
 
-import hexlet.code.Node;
-
+import hexlet.code.Formatters.Stylish;
+import hexlet.code.Formatters.Plain;
+import hexlet.code.Formatters.Json;
 import java.util.List;
 
 public final class Formatter {
