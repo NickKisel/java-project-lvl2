@@ -16,7 +16,7 @@ public class Differ {
         Map<String, Object> data1 = parser.getData(fileContent1, getExtension(filepath1));
         Map<String, Object> data2 = parser.getData(fileContent2, getExtension(filepath2));
 
-        List<Node> commonData = InternalState.getInternalState(data1, data2);
+        List<Node> commonData = StructureTree.getStructure(data1, data2);
 
         Formatter formatter = new Formatter();
         return formatter.choiceFormatter(formatName, commonData);
