@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public final class Plain {
 
-    public String getPlainFormat(List<Node> commonData) {
+    public static String getPlainFormat(List<Node> commonData) {
         List<String> result = new LinkedList<>();
         for (Node node : commonData) {
             if (node.getDescription().get("operation").equals("changed")) {
@@ -36,7 +36,7 @@ public final class Plain {
                 .collect(Collectors.joining());
     }
 
-    private Object getStringValuePlain(Object value) {
+    private static Object getStringValuePlain(Object value) {
         if (value instanceof Collection || value instanceof Map || value instanceof Array) {
             return "[complex value]";
         } else if (value instanceof String) {

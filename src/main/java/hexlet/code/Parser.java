@@ -6,8 +6,8 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import java.util.Map;
 
-public final class Parser {
-    public Map<String, Object> getData(String fileContent, String fileExtension) throws Exception {
+public class Parser {
+    public static Map<String, Object> getData(String fileContent, String fileExtension) throws Exception {
         ObjectMapper mapper;
         Map<String, Object> parseContent = null;
         if (fileExtension.equals(".json")) {

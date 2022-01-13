@@ -10,14 +10,12 @@ public class Differ {
         String fileContent1 = Files.readString(Paths.get(filepath1));
         String fileContent2 = Files.readString(Paths.get(filepath2));
 
-        Parser parser = new Parser();
-        Map<String, Object> data1 = parser.getData(fileContent1, getExtension(filepath1));
-        Map<String, Object> data2 = parser.getData(fileContent2, getExtension(filepath2));
+        Map<String, Object> data1 = Parser.getData(fileContent1, getExtension(filepath1));
+        Map<String, Object> data2 = Parser.getData(fileContent2, getExtension(filepath2));
 
         List<Node> commonData = StructureTree.getStructure(data1, data2);
 
-        Formatter formatter = new Formatter();
-        return formatter.choiceFormatter(formatName, commonData);
+        return Formatter.choiceFormatter(formatName, commonData);
     }
 
     public static String generate(String filepath1, String filepath2) throws Exception {

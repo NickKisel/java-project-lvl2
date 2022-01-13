@@ -17,6 +17,14 @@ class TestDiffer {
     }
 
     @Test
+    void testDiffWrong() throws Exception {
+        String filepath1 = filepath0 + "file1.json";
+        String filepath2 = filepath0 + "file2.json";
+        assertThat(Differ.generate(filepath1, filepath2, "hello"))
+                .isEqualTo("Wrong format!");
+    }
+
+    @Test
     void testDiffJsonDefault() throws Exception {
         String filepath1 = filepath0 + "file1.json";
         String filepath2 = filepath0 + "file2.json";

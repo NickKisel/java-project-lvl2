@@ -6,8 +6,8 @@ import hexlet.code.Node;
 
 import java.util.List;
 
-public final class Json {
-    public String getJsonFormat(List<Node> commonData) {
+public class Json {
+    public static String getJsonFormat(List<Node> commonData) {
         ObjectMapper writer = new ObjectMapper();
         String printJson = null;
         try {

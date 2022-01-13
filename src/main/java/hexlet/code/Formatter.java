@@ -1,22 +1,23 @@
 package hexlet.code;
 
-import hexlet.code.Formatters.Stylish;
-import hexlet.code.Formatters.Plain;
 import hexlet.code.Formatters.Json;
+import hexlet.code.Formatters.Plain;
+import hexlet.code.Formatters.Stylish;
 
 import java.util.List;
 
-public final class Formatter {
-    private String sResult;
+public class Formatter {
 
-    public String choiceFormatter(String formatName, List<Node> commonData) {
-        if (formatName.equals("stylish")) {
-            sResult = new Stylish().getStylishFormat(commonData);
-        } else if (formatName.equals("plain")) {
-            sResult = new Plain().getPlainFormat(commonData);
-        } else if (formatName.equals("json")) {
-            sResult = new Json().getJsonFormat(commonData);
+    public static String choiceFormatter(String formatName, List<Node> commonData) throws Exception {
+        switch (formatName) {
+            case "stylish" :
+                return Stylish.getStylishFormat(commonData);
+            case "plain" :
+                return Plain.getPlainFormat(commonData);
+            case "json" :
+                return  Json.getJsonFormat(commonData);
+            default:
+                return "Wrong format!";
         }
-        return sResult;
     }
 }

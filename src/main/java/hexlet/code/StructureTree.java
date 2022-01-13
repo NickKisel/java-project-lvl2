@@ -13,11 +13,9 @@ public class StructureTree {
         List<Node> structureList = new LinkedList<>();
         for (String key : keys) {
             if (data1.containsKey(key) && data2.containsKey(key)) {
-                if (data1.get(key) != null && data2.get(key) != null && data1.get(key).equals(data2.get(key))
-                        || data1.get(key) == data2.get(key)) {
+                if (!isChanged(data1.get(key), data2.get(key))) {
                     structureList.add(new Node(key, "unchanged", data1.get(key)));
-                } else if (data1.get(key) != null && data2.get(key) != null && !data1.get(key).equals(data2.get(key))
-                        || data1.get(key) != data2.get(key)) {
+                } else if (isChanged(data1.get(key), data2.get(key))) {
                     structureList.add(new Node(key, "changed", data1.get(key), data2.get(key)));
                 }
             } else if (!data2.containsKey(key) && data1.containsKey(key)) {
@@ -27,5 +25,9 @@ public class StructureTree {
             }
         }
         return structureList;
+    }
+
+    private static boolean isChanged(Object value1, Object value2) {
+        return (value1 == null || !value1.equals(value2)) && value1 != value2;
     }
 }

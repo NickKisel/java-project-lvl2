@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public final class Stylish {
 
-    public String getStylishFormat(List<Node> commonData) {
+    public static String getStylishFormat(List<Node> commonData) {
         List<String> result = new LinkedList<>();
         for (Node node : commonData) {
             if (node.getDescription().get("operation").equals("unchanged")) {
@@ -27,7 +27,7 @@ public final class Stylish {
         return stylishToString(result);
     }
 
-    private String stylishToString(List<String> list) {
+    private static String stylishToString(List<String> list) {
         String whitespace = " ";
         final int countWhitespace = 4;
         return list.stream()
