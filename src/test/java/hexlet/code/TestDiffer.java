@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -17,11 +18,14 @@ class TestDiffer {
     }
 
     @Test
-    void testDiffWrong() throws Exception {
+    void testWrongFormat() {
         String filepath1 = filepath0 + "file1.json";
         String filepath2 = filepath0 + "file2.json";
-        assertThat(Differ.generate(filepath1, filepath2, "hello"))
-                .isEqualTo("Wrong format!");
+        String formatName = "abc";
+        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
+            Differ.generate(filepath1, filepath2, formatName);
+        }, "Exception expected");
+        Assertions.assertEquals("Wrong format!", thrown.getMessage());
     }
 
     @Test

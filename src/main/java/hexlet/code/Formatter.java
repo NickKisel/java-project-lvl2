@@ -10,14 +10,14 @@ public class Formatter {
 
     public static String choiceFormatter(String formatName, List<Node> commonData) throws Exception {
         switch (formatName) {
-            case "stylish" :
+            case "stylish":
                 return Stylish.getStylishFormat(commonData);
-            case "plain" :
+            case "plain":
                 return Plain.getPlainFormat(commonData);
-            case "json" :
-                return  Json.getJsonFormat(commonData);
+            case "json":
+                return Json.getJsonFormat(commonData);
             default:
-                return "Wrong format!";
+                throw new Exception("Wrong format!");
         }
     }
 }
